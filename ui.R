@@ -9,38 +9,23 @@ if(!require("shiny")) stop("package shiny is required")
 
 models <- c("JC", "F81", "K80", "HKY", "SYM", "GTR")
 
-shinyUI(navbarPage("",position="fixed-top", collapsible = TRUE,
+shinyUI(
+  navbarPage("shinyPhangorn", position="fixed-top", collapsible = TRUE,
                    theme = "bootstrap.simplex.css", 
 
-                   
-# Application title
-#  titlePanel("shinyPhangorn"),
-#   tabPanel("Tree landscape explorer",
-#           tags$link(rel = 'stylesheet', type = 'text/css', href = 'styles.css'))
-## SERVER INFO ##
-#  tabPanel("System info", 
-#         tags$style(type="text/css", "body {padding-top: 40px;}"),
-#         verbatimTextOutput("systeminfo"))
-#), # end of tabsetPanel
+  tabPanel("Analyse",                   
 
-  # Sidebar with a slider input for number of bins
+# Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
-      
-      ## SPECIFIC TO TREE LANDSCAPE EXPLORER ##
-#      conditionalPanel(condition = "$('li.active a').first().html()== 'Tree landscape explorer'",
-        ## INPUT
-        ## choice of type of data source
-#        img(src="img/line.png", width="100%"),
-#        hr(),
-        h2(HTML('<font color="#6C6CC4" size="6"> > Input </font>')),
+        h2(HTML('<font color="#6C6CC4" size="5"> > Input </font>')),
         radioButtons("datasource", HTML('<font size="4"> Choose data source:</font>'),
           list("Example: Laurasiatherian"="exLaura", 
 #               "Example: chloroplast"="exChloroplast",
                "Input file"="file")),
                        
         ## choice of dataset if source is a file
-       conditionalPanel(condition = "input.datatype=='file'",
+       conditionalPanel(condition = "input.datasource=='file'",
           fileInput("file1", "Load alignment"),
           radioButtons("format", "Format:",
              c("Phylip" = "phylip",
@@ -50,7 +35,8 @@ shinyUI(navbarPage("",position="fixed-top", collapsible = TRUE,
              c("Nucleotide" = "DNA",
              "Amino acid" = "AA"))
          ),
-      hr(),
+#      hr(),
+      h2(HTML('<font color="#6C6CC4" size="5"> > Inference </font>')),
       selectInput("recon", "Reconstruction method:",
                   c("Distance" = "dist",
                     "Maximum Parsimony" = "MP",
@@ -62,9 +48,6 @@ shinyUI(navbarPage("",position="fixed-top", collapsible = TRUE,
       ),
       
       conditionalPanel(condition = "input.recon=='ML'",
-#        if(input$type=="DNA") 
-#          models = c("JC", "F81", "K80", "HKY", "SYM", "GTR"),
-#        else models = phangorn:::.aamodels,
 
         tagList(
           checkboxInput("inv", "Invariant sites:", FALSE),
@@ -85,4 +68,25 @@ shinyUI(navbarPage("",position="fixed-top", collapsible = TRUE,
       plotOutput("distPlot")
     )
   )
+  ), # end tabPanel
+tabPanel("About",
+         HTML("
+              <p>shinyPhangorn is ansimple  interface to infer phylogentic trees using the               R packages ape and phangorn.</p>
+              <p>It is possible to run it from within R:</p>
+              <p><code>shiny::runGitHub('shinyPhangorn', 'KlausVigo')</code></p>
+              
+              <p>The source code of shinyPhangorn is available on <a
+              href='https://github.com/KlausVigo/shinyPhangorn'>GitHub</a>. shinyPhangorn
+              is in early development so I am happy to recieve suggestions or bug reports. </p>
+              <p> </p>
+              <p><strong>References</strong> </p>
+              <p><a href='http://www.rstudio.com/shiny'>shiny</a></p>
+              <p><a href='http://ape-package.ird.fr/'>ape</a> </p>
+              <p><a href='http://cran.r-project.org/web/packages/phangorn/'>phangorn</a></p>
+              <p></p>
+              <p><strong>License</strong> </p>
+              <p>shinyPhangorn is licensed under the GPLv3. </p>
+              ")
+)
+
 ))

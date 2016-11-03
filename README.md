@@ -1,3 +1,4 @@
 # shinyPhangorn
 
-A simple shiny interface to some phylogenetic reconstruction methods. 
+A simple shiny interface to some phylogenetic inference methods. 
+
