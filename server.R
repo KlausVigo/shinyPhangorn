@@ -68,7 +68,8 @@ shinyServer(function(input, output) {
           dm <- dist.ml(align)
           tree <- dist_tree(dm, type=isolate(input$dist_method))
           tree <- ladderize(tree)
-          plot(tree)
+          if(is.rooted(tree)) plot(tree)
+          else  plot(tree, "u")
           add.scale.bar()
         }
       }
@@ -79,7 +80,7 @@ shinyServer(function(input, output) {
           tree <- optim.parsimony(tree, align)
           tree <- acctran(tree, align)
           tree <- ladderize(tree)
-          plot(tree)
+          plot(tree, "u")
           add.scale.bar()
         }
       }  
@@ -90,7 +91,7 @@ shinyServer(function(input, output) {
          fit <- pml(tree, align, k=input$k)
          fit <- optim.pml(fit, rearrangement = "NNI", model=input$ML_model, optInv = input$inv, optGamma = input$gamma)
          tree <- ladderize(fit$tree)
-         plot(tree)
+         plot(tree, "u")
          add.scale.bar()
 #         output$reconText <- renderText({ print(fit) })
         }
