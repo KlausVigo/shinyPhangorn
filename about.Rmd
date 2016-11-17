@@ -1,0 +1,26 @@
+### About
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+shinyPhangorn is a simple interface to infer phylogentic trees using the R packages ape and phangorn.
+It is possible to run it from within R:
+```shiny::runGitHub('shinyPhangorn', 'KlausVigo')```
+              
+The source code of shinyPhangorn is available on [Github](https://github.com/KlausVigo/shinyPhangorn). 
+shinyPhangorn is in early development so I am happy to recieve suggestions or bug reports. 
+ 
+## References
+[shiny](http://www.rstudio.com/shiny)
+
+[ape](http://ape-package.ird.fr/)
+
+[phangorn](http://cran.r-project.org/web/packages/phangorn/)
+
+## License
+shinyPhangorn is licensed under the GPLv3. 
+
+
+
+

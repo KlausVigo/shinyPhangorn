@@ -1,8 +1,6 @@
-# This is the server logic for a Shiny web application.
-# You can find out more about building applications with Shiny here:
-#
-# http://shiny.rstudio.com
-#
+library(shinydashboard)
+library(phangorn)
+
 
 aa_models <- c("WAG", "LG", "JTT")
 dna_models <- c("JC", "F81", "K80", "HKY", "SYM", "GTR")
