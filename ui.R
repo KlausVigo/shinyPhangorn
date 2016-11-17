@@ -2,6 +2,8 @@ library(shinydashboard)
 
 models <- c("JC", "F81", "K80", "HKY", "SYM", "GTR")
 
+header <- dashboardHeader(title = "shinyPhangorn")
+
 sidebar <- dashboardSidebar(
   hr(),
   sidebarMenu(id="tabs",
@@ -59,7 +61,7 @@ body <- dashboardBody(
 )
 
 dashboardPage(
-  dashboardHeader(title = "shinyPhangorn"),
+  header, 
   sidebar,
   body
 )
