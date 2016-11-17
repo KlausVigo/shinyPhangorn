@@ -59,11 +59,14 @@ shinyServer(function(input, output) {
   output$reconText <- renderText({ input$recon })
     
   output$distPlot <- renderPlot({
-    align <- isolate(getData())  
+    align <- isolate(getData())
+    if(!is.null(align)){
+      dm <- dist.ml(align)
+      tree_nj <- nj(dm)
+    }  
     input$goButton
         if(input$recon=="dist"){
         if(!is.null(align)){
-          dm <- dist.ml(align)
           tree <- dist_tree(dm, type=isolate(input$dist_method))
           tree <- ladderize(tree)
           if(is.rooted(tree)) plot(tree)
@@ -73,9 +76,9 @@ shinyServer(function(input, output) {
       }
       if(input$recon=="MP"){
         if(!is.null(align)){
-          dm <- dist.ml(align)
-          tree <- nj(dm)
-          tree <- optim.parsimony(tree, align)
+#          dm <- dist.ml(align)
+#          tree <- nj(dm)
+          tree <- optim.parsimony(tree_nj, align)
           tree <- acctran(tree, align)
           tree <- ladderize(tree)
           plot(tree, "u")
@@ -84,9 +87,9 @@ shinyServer(function(input, output) {
       }  
       if(input$recon=="ML"){
         if(!is.null(align)){
-         dm <- dist.ml(align)
-         tree <- nj(dm)
-         fit <- pml(tree, align, k=input$k)
+#         dm <- dist.ml(align)
+#         tree <- nj(dm)
+         fit <- pml(tree_nj, align, k=input$k)
          fit <- optim.pml(fit, rearrangement = "NNI", model=input$ML_model, optInv = input$inv, optGamma = input$gamma)
          tree <- ladderize(fit$tree)
          plot(tree, "u")
