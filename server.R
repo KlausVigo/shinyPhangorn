@@ -89,8 +89,9 @@ shinyServer(function(input, output) {
         if(!is.null(align)){
 #         dm <- dist.ml(align)
 #         tree <- nj(dm)
-         fit <- pml(tree_nj, align, k=input$k)
-         fit <- optim.pml(fit, rearrangement = "NNI", model=input$ML_model, optInv = input$inv, optGamma = input$gamma)
+         input$pmlButton  
+         fit <- pml(tree_nj, align, k=isolate(input$k))
+         fit <- optim.pml(fit, rearrangement = "NNI", model=isolate(input$ML_model), optInv = isolate(input$inv), optGamma = isolate(input$gamma))
          tree_ml <- ladderize(fit$tree)
          plot(tree_ml, "u")
          add.scale.bar()

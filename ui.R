@@ -43,7 +43,8 @@ sidebar <- dashboardSidebar(
                                       checkboxInput("inv", "Invariant sites:", FALSE),
                                       checkboxInput("gamma", "Gamma:", FALSE, width="45%"),
                                       numericInput("k", "k:", value=1, min=1, max=20, step=1, width="45%"),
-                                      selectInput('ML_model', 'Model:', models)
+                                      selectInput('ML_model', 'Model:', models),
+                                      actionButton("pmlButton", "Compute!")
                                     ) 
                    )
   )
