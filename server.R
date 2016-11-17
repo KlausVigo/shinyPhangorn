@@ -61,13 +61,13 @@ shinyServer(function(input, output) {
   output$distPlot <- renderPlot({
     align <- isolate(getData())
     if(!is.null(align)){
-      dm <- dist.ml(align)
-      tree_nj <- nj(dm)
+      dm <- dist.ml(isolate(align))
+      tree_nj <- nj(isolate(dm))
     }  
     input$goButton
         if(input$recon=="dist"){
         if(!is.null(align)){
-          tree <- dist_tree(dm, type=isolate(input$dist_method))
+          tree <- dist_tree(dm, type=input$dist_method)
           tree <- ladderize(tree)
           if(is.rooted(tree)) plot(tree)
           else  plot(tree, "u")
@@ -91,8 +91,8 @@ shinyServer(function(input, output) {
 #         tree <- nj(dm)
          fit <- pml(tree_nj, align, k=input$k)
          fit <- optim.pml(fit, rearrangement = "NNI", model=input$ML_model, optInv = input$inv, optGamma = input$gamma)
-         tree <- ladderize(fit$tree)
-         plot(tree, "u")
+         tree_ml <- ladderize(fit$tree)
+         plot(tree_ml, "u")
          add.scale.bar()
 #         output$reconText <- renderText({ print(fit) })
         }

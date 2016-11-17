@@ -1,9 +1,5 @@
 ### About
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 shinyPhangorn is a simple interface to infer phylogentic trees using the R packages ape and phangorn.
 It is possible to run it from within R:
 ```shiny::runGitHub('shinyPhangorn', 'KlausVigo')```
