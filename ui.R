@@ -55,7 +55,10 @@ body <- dashboardBody(
             includeMarkdown("about.Rmd")
     ),
     tabItem(tabName = "analyse",
-            plotOutput("distPlot")    
+        box(width = NULL, plotOutput("distPlot",height="500px"), collapsible = TRUE,
+            title = "Plot", status = "primary", solidHeader = TRUE),  
+        box(width = NULL, textOutput("reconText"), collapsible = TRUE, 
+            title = "Summary", status = "primary", solidHeader = TRUE)
     )
   )
 )
