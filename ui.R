@@ -44,7 +44,7 @@ sidebar <- dashboardSidebar(
                                       checkboxInput("gamma", "Gamma:", FALSE, width="45%"),
                                       numericInput("k", "k:", value=1, min=1, max=20, step=1, width="45%"),
                                       selectInput('ML_model', 'Model:', models),
-                                      actionButton("pmlButton", "Compute!")
+                                      div(style="text-align: center;", actionButton("pmlButton", "Compute!"))
                                     ) 
                    )
   )
@@ -56,7 +56,29 @@ body <- dashboardBody(
             includeMarkdown("about.Rmd")
     ),
     tabItem(tabName = "analyse",
-        box(width = NULL, plotOutput("distPlot",height="500px"), collapsible = TRUE,
+        box(width = NULL, plotOutput("distPlot",height="500px")
+            , 
+            HTML("
+<div class=\"btn-group\" data-toggle=\"buttons\">
+  <label class=\"btn btn-primary active\">
+  <input type=\"radio\" name=\"options\" id=\"phylogram\" checked> <img src=./img/phylogram.png width=40 height=40 alt=phylogram/>
+</label>
+  <label class=\"btn btn-primary\">
+  <input type=\"radio\" name=\"options\" id=\"unrooted\"> <img src=./img/unrooted.png width=40 height=40 alt=unrooted/>
+</label>
+  <label class=\"btn btn-primary\">
+  <input type=\"radio\" name=\"options\" id=\"fan\"> <img src=./img/fan.png width=40 height=40 alt=fan/>
+</label>
+  <label class=\"btn btn-primary\">
+  <input type=\"radio\" name=\"options\" id=\"cladogram\"> <img src=./img/cladogram.png width=40 height=40 alt=cladogram/>
+</label>
+  <label class=\"btn btn-primary\">
+  <input type=\"radio\" name=\"options\" id=\"radial\"> <img src=./img/radial.png width=40 height=40 alt=radial/>
+</label>  
+</div>
+"),
+
+            collapsible = TRUE,
             title = "Plot", status = "primary", solidHeader = TRUE),  
         box(width = NULL, textOutput("reconText"), collapsible = TRUE, 
             title = "Summary", status = "primary", solidHeader = TRUE)
