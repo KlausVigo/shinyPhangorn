@@ -5,7 +5,6 @@ models <- c("JC", "F81", "K80", "HKY", "SYM", "GTR")
 header <- dashboardHeader(title = "shinyPhangorn")
 
 sidebar <- dashboardSidebar(
-  hr(),
   sidebarMenu(id="tabs",
               menuItem("Choose data source:", tabName="datasource", icon=icon("download"), selected=TRUE),
               menuItem("Analyse", tabName="analyse", icon=icon("line-chart")),
