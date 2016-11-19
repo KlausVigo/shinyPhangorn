@@ -8,7 +8,7 @@ sidebar <- dashboardSidebar(
   sidebarMenu(id="tabs",
               menuItem("Choose data source:", tabName="datasource", icon=icon("download"), selected=TRUE),
               menuItem("Analyse", tabName="analyse", icon=icon("line-chart")),
-              menuItem("ReadMe", tabName = "readme", icon=icon("mortar-board")),
+              menuItem("ReadMe", tabName = "background", icon=icon("mortar-board")),
               menuItem("About", tabName = "about", icon = icon("question"))
   ),
   hr(),
@@ -53,6 +53,9 @@ body <- dashboardBody(
   tabItems(
     tabItem(tabName = "about",
             includeMarkdown("about.Rmd")
+    ),
+    tabItem(tabName = "background",
+            includeMarkdown("background.Rmd")
     ),
     tabItem(tabName = "analyse",
         box(width = NULL, plotOutput("distPlot",height="500px")

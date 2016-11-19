@@ -1,0 +1,12 @@
+## Distance based methods
+
+## Maximum parsimony
+
+The basic idea behind maximum parsimony (MP) phylogeny inference is that the best phylogenetic tree is the one that explains the character data with the smallest number of
+changes.
+
+## Maximum likelihood
+
+## Tree rearrangements
+
+### Nearest neighbor interchange
